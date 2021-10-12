@@ -1,4 +1,4 @@
-package id.smartech.sobored.ui.model
+package id.smartech.sobored.ui.suggestion.model
 
 data class ResultModel (
     val activity: String,

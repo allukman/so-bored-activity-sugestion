@@ -1,9 +1,8 @@
-package id.smartech.sobored.ui
+package id.smartech.sobored.ui.suggestion
 
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,17 +10,18 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
-import id.smartech.sobored.databinding.ActivityMainBinding
-import id.smartech.sobored.ui.model.ResultModel
+import id.smartech.sobored.databinding.ActivitySuggestionBinding
+import id.smartech.sobored.ui.main.MainActivity
+import id.smartech.sobored.ui.suggestion.model.ResultModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
-    private lateinit var viewModel: MainViewModel
+class SuggestionActivity : BaseActivity<ActivitySuggestionBinding>() {
+    private lateinit var viewModel: SuggestionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setLayout = R.layout.activity_main
+        setLayout = R.layout.activity_suggestion
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         setViewModel()
         subscribeLiveData()
         setOnClick()
@@ -31,20 +31,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         bind.btnNext.setOnClickListener {
             viewModel.getActivityResult()
         }
-
-        bind.instagram.setOnClickListener {
-            intentBrowser("https://www.instagram.com/karsacode/")
+        
+        bind.back.setOnClickListener {
+            onBackPressed()
         }
     }
 
-    private fun intentBrowser(url: String) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(browserIntent)
-    }
-
     private fun setViewModel() {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.setService(createApi(this))
+        viewModel = ViewModelProvider(this).get(SuggestionViewModel::class.java)
+        viewModel.setService(createApiActivities(this))
         viewModel.getActivityResult()
     }
 
@@ -72,11 +67,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
+    private fun intentBrowser(url: String) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
+    }
+
     private fun setData(data: ResultModel) {
         bind.activity.text = data.activity
         bind.type.text = "Type : ${data.type}"
 
-        if(data.link.isNullOrEmpty()) {
+        if(data.link.isEmpty()) {
             bind.activity.setTextColor(Color.parseColor("#FF000000"))
         } else {
             bind.activity.setTextColor(Color.parseColor("#0804e4"))
