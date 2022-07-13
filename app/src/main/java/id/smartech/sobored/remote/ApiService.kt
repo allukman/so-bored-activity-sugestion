@@ -4,6 +4,7 @@ import id.smartech.sobored.ui.cat.model.CatModel
 import id.smartech.sobored.ui.dog.model.DogModel
 import id.smartech.sobored.ui.jokes.model.JokesModel
 import id.smartech.sobored.ui.suggestion.model.ResultModel
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
@@ -18,5 +19,5 @@ interface ApiService {
     suspend fun getWoof(): DogModel
 
     @GET("images/search")
-    suspend fun getMeow(): ArrayList<CatModel>
+    suspend fun getMeow(): Response<List<CatModel>>
 }

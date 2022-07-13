@@ -9,12 +9,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SoBored">
-        <activity android:name=".ui.cat.CatActivity"></activity>
+        android:theme="@style/Theme.SoBored"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.cat.DetailCatActivity"
+            android:exported="false" />
+        <activity android:name=".ui.cat.CatActivity" />
         <activity android:name=".ui.jokes.JokesActivity" />
         <activity android:name=".ui.suggestion.SuggestionActivity" />
         <activity android:name=".ui.main.MainActivity">
