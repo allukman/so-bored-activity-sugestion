@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.github.mervick.aes_everywhere.Aes256
 import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
 import id.smartech.sobored.databinding.ActivityMainBinding
@@ -16,8 +18,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setLayout = R.layout.activity_main
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setOnClick()
     }
 

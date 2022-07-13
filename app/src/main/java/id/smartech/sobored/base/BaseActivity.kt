@@ -16,8 +16,6 @@ abstract class BaseActivity<ActivityBinding : ViewDataBinding> : AppCompatActivi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = DataBindingUtil.setContentView(this@BaseActivity, setLayout!!)
-
-
     }
 
     protected inline fun <reified ClassActivity> intents(context: Context) {

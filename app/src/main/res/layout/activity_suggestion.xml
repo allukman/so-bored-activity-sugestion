@@ -8,16 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.suggestion.SuggestionActivity">
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="32dp"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/happy_blue"
-            android:layout_marginTop="24dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
 
         <ImageButton
             android:id="@+id/back"
@@ -31,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <LinearLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -90,21 +82,34 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+        </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/happy_blue"
+                android:layout_marginTop="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button_1"
-                android:layout_marginTop="24dp"
                 android:textAllCaps="false"
                 android:fontFamily="@font/ubuntu"
                 android:text="Other Activity!"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:paddingHorizontal="48dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="32dp"/>
-        </LinearLayout>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

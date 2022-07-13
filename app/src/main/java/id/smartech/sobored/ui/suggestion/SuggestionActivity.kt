@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
 import id.smartech.sobored.databinding.ActivitySuggestionBinding
 import id.smartech.sobored.ui.main.MainActivity
 import id.smartech.sobored.ui.suggestion.model.ResultModel
+import id.smartech.sobored.ui.util.KarsaLogger
 
 class SuggestionActivity : BaseActivity<ActivitySuggestionBinding>() {
     private lateinit var viewModel: SuggestionViewModel
@@ -48,8 +50,10 @@ class SuggestionActivity : BaseActivity<ActivitySuggestionBinding>() {
             viewModel.isLoadingLiveData.observe (it) { isLoading ->
                 if (isLoading) {
                     bind.progressBar.visibility = View.VISIBLE
+                    bind.btnNext.visibility = View.GONE
                 } else {
                     bind.progressBar.visibility = View.GONE
+                    bind.btnNext.visibility = View.VISIBLE
                 }
             }
         }
@@ -57,6 +61,7 @@ class SuggestionActivity : BaseActivity<ActivitySuggestionBinding>() {
         this.let {
             viewModel.onSuccessLiveData.observe(it) { data ->
                 setData(data)
+                KarsaLogger.print(Gson().toJson(data))
             }
         }
 

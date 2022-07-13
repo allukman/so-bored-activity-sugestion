@@ -18,5 +18,5 @@ interface ApiService {
     suspend fun getWoof(): DogModel
 
     @GET("images/search")
-    suspend fun getMeow(): CatModel
+    suspend fun getMeow(): ArrayList<CatModel>
 }

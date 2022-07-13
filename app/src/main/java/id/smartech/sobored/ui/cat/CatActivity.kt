@@ -8,27 +8,64 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
+import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
 import id.smartech.sobored.databinding.ActivityCatBinding
+import id.smartech.sobored.ui.cat.model.CatModel
 import java.io.File
 
 class CatActivity : BaseActivity<ActivityCatBinding>() {
+    private lateinit var viewModel: CatViewModel
     private var STORAGE_PERMISSION_CODE: Int = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setLayout = R.layout.activity_cat
         super.onCreate(savedInstanceState)
 
-        bind.back.setOnClickListener {
-            startDownload()
-        }
-
-
+        setViewModel()
+        subscribeLiveData()
     }
 
-    private fun setOnClick() {
+    private fun setData(data: CatModel) {
+        Glide.with(this)
+            .load(data.url)
+            .placeholder(R.drawable.white)
+            .error(R.drawable.white)
+            .into(bind.image)
+    }
 
+    private fun setViewModel() {
+        viewModel = ViewModelProvider(this).get(CatViewModel::class.java)
+        viewModel.setService(createApiCat(this))
+        viewModel.getCatImage()
+    }
+
+    private fun subscribeLiveData() {
+        this.let {
+            viewModel.isLoadingLiveData.observe (it) { isLoading ->
+                if (isLoading) {
+                    bind.progressBar.visibility = View.VISIBLE
+                } else {
+                    bind.progressBar.visibility = View.GONE
+                }
+            }
+        }
+
+        this.let {
+            viewModel.onSuccessLiveData.observe(it) { data ->
+                setData(data)
+            }
+        }
+
+        this.let {
+            viewModel.onFailLiveData.observe(it) { onFail ->
+                Log.d("onFail", "")
+            }
+        }
     }
 
     private fun startDownload() {

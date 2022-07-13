@@ -32,7 +32,7 @@ class JokesActivity : BaseActivity<ActivityJokesBinding>() {
 
     private fun setViewModel() {
         viewModel = ViewModelProvider(this).get(JokesViewModel::class.java)
-        viewModel.setService(createApiActivities(this))
+        viewModel.setService(createApiJokes(this))
         viewModel.getJokesPlease()
     }
 
@@ -55,7 +55,10 @@ class JokesActivity : BaseActivity<ActivityJokesBinding>() {
 
         this.let {
             viewModel.onFailLiveData.observe(it) { onFail ->
-                Log.d("onFail", "")
+                if(onFail) {
+                    Log.d("onFail", "")
+                }
+
             }
         }
     }

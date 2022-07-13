@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiClient {
     companion object {
-        private const val BASE_URL_ACTIVITIES = "https://v2.jokeapi.dev/"
+        private const val BASE_URL_ACTIVITIES = "http://www.boredapi.com/api/"
         private const val BASE_URL_JOKES ="https://v2.jokeapi.dev/"
         private const val BASE_URL_DOG ="https://random.dog/"
         private const val BASE_URL_CAT ="https://api.thecatapi.com/v1/"
