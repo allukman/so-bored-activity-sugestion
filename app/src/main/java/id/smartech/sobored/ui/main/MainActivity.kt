@@ -11,6 +11,7 @@ import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
 import id.smartech.sobored.databinding.ActivityMainBinding
 import id.smartech.sobored.ui.cat.CatActivity
+import id.smartech.sobored.ui.dog.DogActivity
 import id.smartech.sobored.ui.jokes.JokesActivity
 import id.smartech.sobored.ui.suggestion.SuggestionActivity
 
@@ -34,6 +35,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         bind.cat.setOnClickListener {
             intents<CatActivity>(this)
+        }
+
+        bind.dog.setOnClickListener {
+            intents<DogActivity>(this)
         }
 
         bind.instagram.setOnClickListener {

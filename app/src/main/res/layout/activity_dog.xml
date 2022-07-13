@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.cat.CatActivity">
+        tools:context=".ui.dog.DogActivity">
 
         <ImageButton
             android:id="@+id/back"
@@ -68,7 +68,7 @@
                     android:background="@drawable/custom_button_1"
                     android:fontFamily="@font/ubuntu"
                     android:paddingHorizontal="48dp"
-                    android:text="Other Cat Please!"
+                    android:text="Other Dog Please!"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp"
@@ -92,5 +92,6 @@
 
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -14,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SoBored"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.cat.DetailCatActivity"
-            android:exported="false" />
+        <activity android:name=".ui.dog.DogActivity"/>
+        <activity android:name=".ui.cat.DetailCatActivity"/>
         <activity android:name=".ui.cat.CatActivity" />
         <activity android:name=".ui.jokes.JokesActivity" />
         <activity android:name=".ui.suggestion.SuggestionActivity" />

@@ -16,7 +16,7 @@ interface ApiService {
     suspend fun getJokes(): JokesModel
 
     @GET("woof.json")
-    suspend fun getWoof(): DogModel
+    suspend fun getWoof(): Response<DogModel>
 
     @GET("images/search")
     suspend fun getMeow(): Response<List<CatModel>>

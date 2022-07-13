@@ -1,4 +1,4 @@
-package id.smartech.sobored.ui.cat
+package id.smartech.sobored.ui.dog
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,7 +6,6 @@ import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.app.DownloadManager
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -17,69 +16,35 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import id.smartech.sobored.R
 import id.smartech.sobored.base.BaseActivity
-import id.smartech.sobored.databinding.ActivityCatBinding
-import id.smartech.sobored.ui.cat.model.CatModel
-import id.smartech.sobored.ui.main.MainActivity
+import id.smartech.sobored.databinding.ActivityDogBinding
+import id.smartech.sobored.ui.dog.model.DogModel
 import id.smartech.sobored.ui.util.KarsaLogger
 import java.io.File
 
-class CatActivity : BaseActivity<ActivityCatBinding>() {
-    private lateinit var viewModel: CatViewModel
+class DogActivity : BaseActivity<ActivityDogBinding>() {
+    private lateinit var viewModel: DogViewModel
     private var STORAGE_PERMISSION_CODE: Int = 1000
     private var imageUrl: String? = null
     private var msg: String? = ""
     private var lastMsg = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setLayout = R.layout.activity_cat
+        setLayout = R.layout.activity_dog
         super.onCreate(savedInstanceState)
 
-        setOnClick()
         setViewModel()
         subscribeLiveData()
+        setOnClick()
+
     }
-
-    private fun setOnClick() {
-        bind.download.setOnClickListener {
-            if (imageUrl.isNullOrBlank()) {
-                noticeToast("Url image not found")
-            } else {
-                doDownload()
-            }
-        }
-        bind.btnNext.setOnClickListener {
-            viewModel.getCatImage()
-        }
-
-        bind.back.setOnClickListener {
-            intents<MainActivity>(this)
-        }
-
-        bind.image.setOnClickListener {
-            val intent = Intent(this, DetailCatActivity::class.java)
-            intent.putExtra("urlImage", imageUrl)
-            startActivity(intent)
-        }
-    }
-
-
-    private fun setData(data: CatModel) {
-        Glide.with(this)
-            .load(data.url)
-            .placeholder(R.drawable.white)
-            .error(R.drawable.white)
-            .into(bind.image)
-        imageUrl = data.url
-    }
-
     private fun setViewModel() {
-        viewModel = ViewModelProvider(this).get(CatViewModel::class.java)
-        viewModel.setService(createApiCat(this))
-        viewModel.getCatImage()
+        viewModel = ViewModelProvider(this).get(DogViewModel::class.java)
+        viewModel.setService(createApiDog(this))
+        viewModel.getDogImage()
     }
 
     private fun subscribeLiveData() {
@@ -97,7 +62,27 @@ class CatActivity : BaseActivity<ActivityCatBinding>() {
 
         this.let {
             viewModel.onSuccessLiveData.observe(it) { data ->
-                setData(data[0])
+                setData(data)
+            }
+        }
+    }
+
+    private fun setData(data: DogModel) {
+        bind.image.load(data.url)
+        imageUrl = data.url
+        KarsaLogger.print(data.url)
+    }
+
+    private fun setOnClick() {
+        bind.btnNext.setOnClickListener() {
+            viewModel.getDogImage()
+        }
+
+        bind.download.setOnClickListener {
+            if (imageUrl.isNullOrBlank()) {
+                noticeToast("Url image not found")
+            } else {
+                doDownload()
             }
         }
     }
@@ -228,4 +213,5 @@ class CatActivity : BaseActivity<ActivityCatBinding>() {
         }
         return msg
     }
+
 }
